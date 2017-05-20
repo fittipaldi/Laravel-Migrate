@@ -19,7 +19,7 @@ class CreateAtivosTable extends Migration
             $table->datetime('data');
             $table->integer('mes');
             $table->integer('ano');
-            $table->enum('status', [0, 1]);
+            $table->enum('status', [0, 1])->comment('0 - inativo 1 - ativo')->default(1);
             $table->decimal('valor', 10, 2);
             $table->rememberToken();
             $table->timestamps();
