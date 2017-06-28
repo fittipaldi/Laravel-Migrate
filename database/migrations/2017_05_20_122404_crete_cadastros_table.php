@@ -7,56 +7,40 @@ class CreteCadastrosTable extends Migration
 {
     /**
      * Run the migrations.
-     *
      * @return void
      */
     public function up()
     {
         Schema::create('cadastros', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->enum('aprovado', [0, 1])->comment('0 - nao aprovado 1 - aprovado');
-            $table->integer('id_patrocinador');
+            $table->enum('status', [0, 1, 2])->comment('0 - pendente, 1 - aprovado, 2 - cancelado')->default(0);
+            $table->integer('patrocinador_id')->nullable()->comment('foreing key para um parent id dessa mesma tabela');
             $table->datetime('data_cadastro');
-            $table->datetime('data_aprovado');
-            $table->datetime('data_cancelado');
-            $table->string('usuario')->unique();
-            $table->string('senha');
-            $table->string('nome');
-            $table->string('email');
+            $table->datetime('data_aprovado')->nullable();
+            $table->datetime('data_cancelado')->nullable();
+            $table->string('usuario', 50)->unique();
+            $table->string('senha', 100);
+            $table->string('nome', 255);
+            $table->string('email', 200);
             $table->enum('sexo', ['m', 'f'])->comment('m - masculino, f - feminino');
             $table->date('data_nascimento');
-            $table->string('cpf');
-            $table->string('rg');
-            $table->string('cnpj');
-            $table->string('inscricao_estadual');
-            $table->string('tel_primario');
-            $table->string('tel_secundario');
-            $table->string('celular');
-            $table->string('razao_social');
-            $table->string('banco_nome');
-            $table->string('banco_agencia');
-            $table->string('banco_agencia_digito');
-            $table->string('banco_conta');
-            $table->string('banco_conta_digito');
-            $table->string('banco_operacao');
-            $table->string('banco_conta_tipo');
-            $table->enum('tipop_essoa', ['f', 'j'])->comment('f - pessoa fisica, j - pessoa juridica');
-            $table->string('estadocivil');
-            $table->enum('lado_binario', [0, 1])->comment('0 - esquerda 1 - direita');
-            $table->string('conta_titular');
-            $table->string('avatar');
-            $table->string('ip_cadastro');
-            $table->datetime('data_qualificacao');
-            $table->enum('status', [0, 1])->comment('0 - inativo 1 - ativo')->default(1);
+            $table->string('cpf', 50);
+            $table->string('rg', 50);
+            $table->string('telefone', 25);
+            $table->string('celular', 25);
+            $table->string('carteira_bitcoin', 255);
+            $table->enum('lado_binario', ['d', 'e'])->comment('e - esquerda d - direita')->default('d');
+            $table->string('avatar', 255);
+            $table->string('ip_cadastro', 50);
+            $table->integer('plano_id')->unsigned();
             $table->string('token')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
      * Reverse the migrations.
-     *
      * @return void
      */
     public function down()
