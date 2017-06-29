@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', ['uses' => 'HomeController@index', 'as' => 'home']);
+
+Route::get('/cadastro.save', ['uses' => 'HomeController@index', 'as' => 'cadastro.save']);
+
+Route::get('/welcome', function () {
     return view('welcome');
 });
 

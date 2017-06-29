@@ -13,7 +13,7 @@ class AlterCadastrosTable extends Migration
     {
         Schema::table('cadastros', function (Blueprint $table) {
             $table->foreign('plano_id')->references('id')->on('planos');
-            $table->foreign('patrocinador_id')->references('id')->on('cadastros');
+            //$table->foreign('patrocinador_id')->references('id')->on('cadastros');
         });
     }
 

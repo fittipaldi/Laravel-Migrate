@@ -31,7 +31,7 @@ class CreteCadastrosTable extends Migration
             $table->string('celular', 25);
             $table->string('carteira_bitcoin', 255);
             $table->enum('lado_binario', ['d', 'e'])->comment('e - esquerda d - direita')->default('d');
-            $table->string('avatar', 255);
+            $table->string('avatar', 255)->nullable();
             $table->string('ip_cadastro', 50);
             $table->integer('plano_id')->unsigned();
             $table->string('token')->nullable();
